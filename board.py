@@ -35,7 +35,22 @@ def place_mark(currentPlayer, currentMark):
    pass
 
 def check_win():
-   pass
+   c = '-'
+   for myList in board:
+      if myList == ['X','X','X'] or myList == ['O', 'O', 'O']:
+         c = myList[0]
+         return c
+   for i in range(3):
+      if board[0][i]==board[1][i] and board[1][i]==board[2][i]:
+         c = board[0][i]
+         return c
+   if board[0][0]==board[1][1] and board[1][1]==board[2][2]:
+      c = board[0][0]
+      return c
+   if board[0][2]==board[1][1] and board[1][1]==board[2][0]:
+      c = board[0][2]
+      return c
+   return c
 
 def main():
    done = False
@@ -46,6 +61,11 @@ def main():
    while done == False:
 
     place_mark(cPlayer, cMark)
+
+    result = check_win()
+    if result != '-':
+       print("Player ", cPlayer+1, " wins! Game Over!")
+       break
     print_board()
     if cPlayer == 0:
         cPlayer = 1
